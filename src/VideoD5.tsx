@@ -369,44 +369,47 @@ export const VideoD5: React.FC = () => {
       <Scene s={0} e={4.2} bg={SKY} tab={PINK}>
         <Sticky x={CX} y={290} w={420} t0={0.1} text="mẹo đi học" color={PINK} rot={-3} font="Baloo2" size={48} />
         <Title x={490} y={520} t0={0.3} lines={["Crush nhìn bạn", "nhiều hơn?"]} size={70} hl={[1, 0, PINK]} />
-        <Polaroid x={CX} y={960} t0={1.0} src="dl/dtt.jpg" rot={-2} note="đi học nè" sc={0.95} />
-        <HeartS x={150} y={800} size={110} t0={3.0} rot={-10} />
-        <StarS x={830} y={820} size={110} t0={3.4} rot={10} />
+        <Polaroid x={300} y={1049} t0={0.9} src="dl/dtt.jpg" rot={-3} note="đi học nè" sc={0.72} />
+        <VideoFrame x={680} y={1170} w={250} t0={1.4} src="dl/cA.mp4" rot={3} dur={300} />
+        <HeartS x={150} y={800} size={100} t0={3.0} rot={-10} />
+        <StarS x={830} y={800} size={100} t0={3.4} rot={10} />
       </Scene>
       <Scene s={4.2} e={11.8} bg={PEACH} tab={CORAL}>
         <Burst x={200} y={420} t0={4.4} text={'Mẹo\n1'} size={240} />
         <Title x={620} y={430} t0={5.0} lines={["Ngồi trong", "tầm mắt crush"]} size={62} hl={[1, 0, BUTTER]} />
-        <Sticky x={CX} y={760} w={680} t0={7.6} text="Chéo chéo phía trước hoặc cùng dãy là đẹp" color={BUTTER} rot={-2} font="Baloo2" size={42} />
-        <Sticky x={CX} y={1060} w={700} t0={9.8} text="Ánh nhìn vô thức hay lướt qua những gì ở gần" color={PINK} rot={2} font="Baloo2" size={42} />
-        <CloudS x={830} y={1330} size={130} t0={10.6} rot={8} />
+        <Sticky x={CX} y={640} w={680} t0={7.6} text="Chéo chéo phía trước hoặc cùng dãy là đẹp" color={BUTTER} rot={-2} font="Baloo2" size={42} />
+        <VideoFrame x={300} y={1170} w={250} t0={5.6} src="dl/cB.mp4" rot={-3} dur={300} />
+        <Polaroid x={680} y={1049} t0={7.0} src="dl/tl.jpg" rot={3} note="trong tầm mắt" sc={0.72} />
       </Scene>
       <Scene s={11.84} e={17.94} bg={LAV} tab={BUTTER}>
         <Burst x={200} y={420} t0={12.0} text={'Mẹo\n2'} size={240} color={"#8aa0e0"} />
         <Title x={620} y={430} t0={12.6} lines={["Một điểm nhấn", "nhỏ trên người"]} size={62} hl={[1, 0, PINK]} />
-        <Check x={CX} y={780} w={760} t0={13.8} text="Màu áo nổi bật" color={MINT} />
-        <Check x={CX} y={900} w={760} t0={14.8} text="Cây bút xinh" color={BUTTER} />
-        <Sticky x={CX} y={1140} w={680} t0={16.2} text="Mắt dễ bị hút vào thứ quen mà lạ" color={PINK} rot={2} font="Baloo2" size={42} />
+        <Check x={CX} y={630} w={760} t0={13.8} text="Màu áo nổi bật" color={MINT} />
+        <Check x={CX} y={740} w={760} t0={14.8} text="Cây bút xinh" color={BUTTER} />
+        <Polaroid x={300} y={1049} t0={12.9} src="dl/gd.jpg" rot={-3} note="điểm nhấn nhỏ" sc={0.72} />
+        <VideoFrame x={680} y={1170} w={250} t0={13.5} src="dl/cC.mp4" rot={3} dur={300} />
       </Scene>
       <Scene s={17.96} e={24.64} bg={MINT} tab={SKY}>
         <Burst x={200} y={420} t0={18.1} text={'Mẹo\n3'} size={240} color={"#7fc3a3"} />
         <Title x={620} y={430} t0={18.8} lines={["Cười thật nhiều", "khi nói chuyện"]} size={62} hl={[1, 0, BUTTER]} />
-        <Sticky x={CX} y={820} w={680} t0={21.0} text="Năng lượng vui vẻ làm người khác tò mò" color={BUTTER} rot={-2} font="Baloo2" size={42} />
-        <Sticky x={CX} y={1100} w={640} t0={23.0} text="muốn biết bạn đang cười chuyện gì" color={PINK} rot={2} font="Baloo2" size={42} />
-        <FlowerS x={180} y={1360} size={130} t0={21.6} rot={-8} />
-        <HeartS x={820} y={1360} size={120} t0={22.4} rot={8} />
+        <Sticky x={CX} y={640} w={680} t0={20.8} text="Năng lượng vui vẻ làm người khác tò mò" color={BUTTER} rot={-2} font="Baloo2" size={42} />
+        <VideoFrame x={300} y={1170} w={250} t0={19.4} src="dl/cA.mp4" rot={-3} dur={300} />
+        <Polaroid x={680} y={1049} t0={21.5} src="dl/gd.jpg" rot={3} note="vui vẻ nè" sc={0.72} />
+        <HeartS x={820} y={860} size={90} t0={22.4} rot={8} />
       </Scene>
       <Scene s={24.66} e={27.55} bg={SKY} tab={PINK}>
         <Burst x={200} y={420} t0={24.8} text={'Mẹo\n4'} size={240} />
         <Title x={620} y={430} t0={25.4} lines={["Phát biểu một", "lần thật tự tin"]} size={62} hl={[1, 0, PINK]} />
-        <Sticky x={CX} y={800} w={640} t0={26.4} text="Cả lớp sẽ quay lại nhìn" color={BUTTER} rot={-2} font="Baloo2" size={42} />
-        <StarS x={490} y={1150} size={160} t0={26.8} rot={-6} />
+        <Sticky x={CX} y={640} w={640} t0={26.4} text="Cả lớp sẽ quay lại nhìn" color={BUTTER} rot={-2} font="Baloo2" size={42} />
+        <VideoFrame x={490} y={1150} w={330} t0={25.2} src="dl/cC.mp4" rot={-2} dur={300} />
       </Scene>
       <Scene s={27.57} e={31} bg={PEACH} tab={CORAL} last>
-        <Sticky x={CX} y={330} w={680} t0={27.7} text="Lưu lại mẹo này" color={BUTTER} rot={-2} font="Baloo2" size={54} />
-        <Sticky x={CX} y={560} w={680} t0={28.9} text="Mai vào lớp thử ngay nha" color={PINK} rot={2} font="Baloo2" size={46} />
-        <Polaroid x={CX} y={1000} t0={29.2} src="dl/tl.jpg" rot={-3} note="kể mình nghe nha" sc={1.0} />
-        <HeartS x={150} y={1000} size={120} t0={29.6} rot={-10} />
-        <StarS x={830} y={1010} size={120} t0={29.9} rot={10} />
+        <Sticky x={CX} y={320} w={680} t0={27.7} text="Lưu lại mẹo này" color={BUTTER} rot={-2} font="Baloo2" size={54} />
+        <Sticky x={CX} y={540} w={680} t0={28.9} text="Mai vào lớp thử ngay nha" color={PINK} rot={2} font="Baloo2" size={46} />
+        <Polaroid x={300} y={1059} t0={28.4} src="dl/dtt.jpg" rot={-3} note="kể mình nghe nha" sc={0.7} />
+        <VideoFrame x={680} y={1180} w={250} t0={29.0} src="dl/cB.mp4" rot={3} dur={300} />
+        <HeartS x={150} y={860} size={100} t0={29.6} rot={-10} />
+        <StarS x={830} y={860} size={100} t0={29.9} rot={10} />
       </Scene>
       <Caption />
     </AbsoluteFill>
