@@ -366,6 +366,12 @@ const Caption: React.FC<{caps: [number, number, string][]}> = ({caps}) => {
   );
 };
 
+const useClock = () => {
+  const f = useCurrentFrame();
+  const {fps} = useVideoConfig();
+  TNOW = f / fps;
+};
+
 const Shell: React.FC<{voice: string; caps: [number, number, string][]; children: React.ReactNode}> = ({voice, caps, children}) => {
   useFonts();
   const f = useCurrentFrame();
@@ -391,7 +397,9 @@ const Shell: React.FC<{voice: string; caps: [number, number, string][]; children
 };
 
 // ===== Dòng 9: soi lớp nền dưới ánh sáng thật =====
-export const TapDong9: React.FC = () => (
+export const TapDong9: React.FC = () => {
+  useClock();
+  return (
   <Shell voice="dl/voice1.mp3" caps={CAPS1}>
     <Scene s={0} e={7.4} bg={SKY} tab={PINK}>
       <Sticky x={CX} y={290} w={420} t0={0.1} text="mẹo 30 giây" color={PINK} rot={-3} font="Baloo2" size={48} />
@@ -423,10 +431,13 @@ export const TapDong9: React.FC = () => (
       <StarS x={810} y={1340} size={130} t0={22.4} rot={10} />
     </Scene>
   </Shell>
-);
+  );
+};
 
 // ===== Dòng 10: 3 chi tiết bạn cùng bàn thấy =====
-export const TapDong10: React.FC = () => (
+export const TapDong10: React.FC = () => {
+  useClock();
+  return (
   <Shell voice="dl/voice2.mp3" caps={CAPS2}>
     <Scene s={0} e={5.6} bg={SKY} tab={PINK}>
       <Sticky x={CX} y={290} w={420} t0={0.1} text="mẹo đi học" color={PINK} rot={-3} font="Baloo2" size={48} />
@@ -460,10 +471,13 @@ export const TapDong10: React.FC = () => (
       <StarS x={810} y={1160} size={130} t0={26.2} rot={10} />
     </Scene>
   </Shell>
-);
+  );
+};
 
 // ===== Dòng 11: thao tác 9h tối =====
-export const TapDong11: React.FC = () => (
+export const TapDong11: React.FC = () => {
+  useClock();
+  return (
   <Shell voice="dl/voice3.mp3" caps={CAPS3}>
     <Scene s={0} e={4.3} bg={SKY} tab={PINK}>
       <Sticky x={CX} y={290} w={420} t0={0.1} text="mẹo đi học" color={PINK} rot={-3} font="Baloo2" size={48} />
@@ -504,4 +518,5 @@ export const TapDong11: React.FC = () => (
       <StarS x={810} y={1330} size={120} t0={26.9} rot={10} />
     </Scene>
   </Shell>
-);
+  );
+};
