@@ -14,12 +14,14 @@ export type MemeScene = {
   e: number; // giây kết thúc
   bg?: 'pink' | 'lime' | 'blue' | 'yellow' | 'violet' | 'orange';
   photo?: string; // dl/IMGxxx.jpg hoặc dl/CLIPxxx.mp4 (9:16)
+  photos?: string[]; // nhiều ảnh/clip xoay đều trong cảnh (cắt cứng), ưu tiên hơn photo
   mode?: 'full' | 'card' | 'none';
   title?: string[]; // 1-3 dòng chữ to
   titleY?: number; // mặc định 430
   titleSize?: number; // mặc định 88
   list?: string[]; // các ý dạng pill đánh số
   listY?: number; // mặc định 1000
+  listAt?: number[]; // giây (tuyệt đối) hiện từng pill, mặc định s+0.5+i*0.5
   note?: string; // sticky ngắn dưới cùng (y ~1330)
   stickers?: MemeSticker[];
   review?: {stars?: number; text: string; src?: string; y?: number}; // thẻ đánh giá thật (trích nguyên văn)
@@ -256,8 +258,9 @@ const DayBadge: React.FC<{day: number; total: number}> = ({day, total}) => {
 
 const SceneView: React.FC<{sc: MemeScene; idx: number}> = ({sc, idx}) => {
   const [c1, c2] = BG[sc.bg || (['pink', 'lime', 'blue', 'yellow', 'violet', 'orange'] as const)[idx % 6]];
-  const mode = sc.mode || (sc.photo ? 'full' : 'none');
   const t = useT();
+  const media = sc.photos && sc.photos.length ? sc.photos[Math.min(sc.photos.length - 1, Math.max(0, Math.floor((t - sc.s) / ((sc.e - sc.s) / sc.photos.length))))] : sc.photo;
+  const mode = sc.mode || (media ? 'full' : 'none');
   const zoom = 1.03 + 0.07 * clamp((t - sc.s) / (sc.e - sc.s));
   const stickers = sc.stickers || AUTO[idx % AUTO.length];
   const ty = sc.titleY ?? (mode === 'none' ? 640 : 430);
@@ -265,23 +268,23 @@ const SceneView: React.FC<{sc: MemeScene; idx: number}> = ({sc, idx}) => {
   return (
     <SceneBox s={sc.s} e={sc.e}>
       <Halftone c1={c1} c2={c2} />
-      {mode === 'full' && sc.photo && (
+      {mode === 'full' && media && (
         <>
-          <Media src={sc.photo} style={{position: 'absolute', left: 0, top: 0, width: 1080, height: 1920, transform: `scale(${zoom})`}} />
+          <Media key={media} src={media} style={{position: 'absolute', left: 0, top: 0, width: 1080, height: 1920, transform: `scale(${zoom})`}} />
           <div style={{position: 'absolute', left: 0, top: 0, width: 1080, height: 700, background: `linear-gradient(to bottom, ${c1}cc 0%, ${c1}55 60%, transparent 100%)`}} />
           <div style={{position: 'absolute', left: 0, top: 1300, width: 1080, height: 620, background: 'linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 100%)'}} />
           <div style={{position: 'absolute', left: 24, top: 24, width: 1032, height: 1872, border: `10px solid ${INK}`, borderRadius: 30}} />
         </>
       )}
-      {mode === 'card' && sc.photo && (
+      {mode === 'card' && media && (
         <div style={{position: 'absolute', left: 540 - 290, top: 450, width: 580, transform: `rotate(${idx % 2 ? 3 : -3}deg) scale(${pop(t, sc.s + 0.05) || 0.01})`}}>
           <div style={{background: '#fff', border: `8px solid ${INK}`, borderRadius: 22, padding: 14, boxShadow: `14px 16px 0 ${INK}`}}>
-            <Media src={sc.photo} style={{width: 540, height: 960, display: 'block', borderRadius: 10}} />
+            <Media key={media} src={media} style={{width: 540, height: 960, display: 'block', borderRadius: 10}} />
           </div>
         </div>
       )}
       {sc.title && <BigText y={ty} t0={sc.s + 0.1} lines={sc.title} size={ts} color={idx % 3 === 1 ? '#ffe600' : '#fff'} rot={idx % 2 ? 2 : -2} />}
-      {sc.list && sc.list.map((it, i) => <Pill key={i} y={(sc.listY ?? 960) + i * 150} t0={sc.s + 0.5 + i * 0.5} n={i + 1} text={it} color={ACCENT[i % 4]} />)}
+      {sc.list && sc.list.map((it, i) => <Pill key={i} y={(sc.listY ?? 960) + i * 150} t0={sc.listAt?.[i] ?? sc.s + 0.5 + i * 0.5} n={i + 1} text={it} color={ACCENT[i % 4]} />)}
       {sc.review && <ReviewCard r={sc.review} t0={sc.s + 0.3} />}
       {sc.qa && <QA q={sc.qa} t0={sc.s + 0.3} />}
       {sc.note && <Note y={1330} t0={sc.s + 0.7} text={sc.note} />}
