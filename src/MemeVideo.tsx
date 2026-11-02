@@ -277,9 +277,9 @@ const SceneView: React.FC<{sc: MemeScene; idx: number}> = ({sc, idx}) => {
         </>
       )}
       {mode === 'card' && media && (
-        <div style={{position: 'absolute', left: 540 - 290, top: 450, width: 580, transform: `rotate(${idx % 2 ? 3 : -3}deg) scale(${pop(t, sc.s + 0.05) || 0.01})`}}>
+        <div style={{position: 'absolute', left: 540 - 450, top: 175, width: 900, transform: `rotate(${idx % 2 ? 3 : -3}deg) scale(${pop(t, sc.s + 0.05) || 0.01})`}}>
           <div style={{background: '#fff', border: `8px solid ${INK}`, borderRadius: 22, padding: 14, boxShadow: `14px 16px 0 ${INK}`}}>
-            <Media key={media} src={media} style={{width: 540, height: 960, display: 'block', borderRadius: 10}} />
+            <Media key={media} src={media} style={{width: 864, height: 1536, display: 'block', borderRadius: 10}} />
           </div>
         </div>
       )}
