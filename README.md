@@ -21,3 +21,6 @@ Quy tắc: sticker không che mặt/sản phẩm, chữ nằm trong vùng an to�
 
 ### Series "100 ngày" (đánh giá 5 sao + trả lời comment) — dùng MemeVideo
 Spec thêm `day` (tập thứ mấy), `total` (mặc định 100). Scene thêm `review:{stars,text,src,y}` (thẻ đánh giá, chỉ dùng review thật nguyên văn, ví dụ FB001–FB009 tab 'Kho ảnh') và `qa:{user,q,a,y}` (comment khách + shop trả lời, chỉ dùng comment thật đã lọc). Mẫu: `src/memeSpecs/series.ts` (composition `Series100`; câu hỏi trong mẫu là câu giả để xem bố cục). `voice` bỏ trống = bản xem thử không tiếng.
+
+## Template "Bát tự sổ tay thư pháp" (thư mục `bazi/`)
+Dự án Remotion riêng (cài `npm i` trong `bazi/`). Video bát tự/lưu niên, font thư pháp, màu Ngũ hành, có thẻ comment thật. Mẫu: `Bazi1992` (Sinh 1992, nửa cuối 2026). Xem `bazi/README.md`.
