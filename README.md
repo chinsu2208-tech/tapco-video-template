@@ -18,3 +18,6 @@ Mỗi video = 1 file `src/memeSpecs/<tên>.ts` export `MemeSpec` {voice, caps:[g
 Scene: {s,e,bg(pink|lime|blue|yellow|violet|orange),photo,mode(full|card|none),title[],titleY,list[],listY,note,stickers[]}.
 Chọn template: cột L "Kiểu video" chứa "meme" => MemeVideo; còn lại => scrapbook (Tips).
 Quy tắc: sticker không che mặt/sản phẩm, chữ nằm trong vùng an toàn TikTok (y 280–1500).
+
+### Series "100 ngày" (đánh giá 5 sao + trả lời comment) — dùng MemeVideo
+Spec thêm `day` (tập thứ mấy), `total` (mặc định 100). Scene thêm `review:{stars,text,src,y}` (thẻ đánh giá, chỉ dùng review thật nguyên văn, ví dụ FB001–FB009 tab 'Kho ảnh') và `qa:{user,q,a,y}` (comment khách + shop trả lời, chỉ dùng comment thật đã lọc). Mẫu: `src/memeSpecs/series.ts` (composition `Series100`; câu hỏi trong mẫu là câu giả để xem bố cục). `voice` bỏ trống = bản xem thử không tiếng.

@@ -22,11 +22,15 @@ export type MemeScene = {
   listY?: number; // mặc định 1000
   note?: string; // sticky ngắn dưới cùng (y ~1330)
   stickers?: MemeSticker[];
+  review?: {stars?: number; text: string; src?: string; y?: number}; // thẻ đánh giá thật (trích nguyên văn)
+  qa?: {user?: string; q: string; a: string; y?: number}; // comment khách + shop trả lời
 };
 export type MemeSpec = {
-  voice: string; // dl/voiceNN.mp3
+  voice?: string; // dl/voiceNN.mp3 (bỏ trống = không tiếng, dùng để xem thử)
   caps: [number, number, string][]; // [bắt đầu, kết thúc, câu]
   scenes: MemeScene[];
+  day?: number; // series: tập thứ mấy
+  total?: number; // mặc định 100
 };
 
 const INK = '#111111';
@@ -204,6 +208,52 @@ const AUTO: MemeSticker[][] = [
   [{type: 'heart', x: 180, y: 300, size: 130, rot: -10}, {type: 'arrow', x: 860, y: 1180, size: 200, rot: 20}],
 ];
 
+const ReviewCard: React.FC<{r: NonNullable<MemeScene['review']>; t0: number}> = ({r, t0}) => {
+  const t = useT();
+  const k = pop(t, t0) || 0.01;
+  const n = r.stars ?? 5;
+  return (
+    <div style={{position: 'absolute', left: 120, top: r.y ?? 560, width: 780, transform: `rotate(-2deg) scale(${k})`}}>
+      <div style={{position: 'absolute', left: 20, top: -44, background: '#ff3d81', color: '#fff', border: `6px solid ${INK}`, borderRadius: 16, padding: '4px 22px', fontFamily: 'Baloo2', fontWeight: 800, fontSize: 38, transform: 'rotate(-4deg)', zIndex: 2}}>ĐÁNH GIÁ THẬT</div>
+      <div style={{background: '#fff', border: `8px solid ${INK}`, borderRadius: 28, padding: '48px 40px 34px', boxShadow: `14px 16px 0 ${INK}`}}>
+        <div style={{fontSize: 74, letterSpacing: 6, color: '#ffc800', WebkitTextStroke: `3px ${INK}`, lineHeight: 1}}>{'★'.repeat(n)}</div>
+        <div style={{fontFamily: 'Baloo2', fontWeight: 800, fontSize: 52, lineHeight: 1.2, color: INK, marginTop: 18}}>“{r.text}”</div>
+        <div style={{fontFamily: 'Baloo2', fontWeight: 600, fontSize: 34, color: '#555', marginTop: 16}}>{r.src ?? 'Khách TAP Store · Seller Center'}</div>
+      </div>
+    </div>
+  );
+};
+
+const QA: React.FC<{q: NonNullable<MemeScene['qa']>; t0: number}> = ({q, t0}) => {
+  const t = useT();
+  const k1 = pop(t, t0) || 0.01;
+  const k2 = pop(t, t0 + 1.3) || 0.01;
+  const y = q.y ?? 520;
+  const bub = (bg: string): React.CSSProperties => ({background: bg, border: `8px solid ${INK}`, borderRadius: 32, padding: '26px 34px', boxShadow: `12px 14px 0 ${INK}`, fontFamily: 'Baloo2', fontWeight: 800, color: INK});
+  return (
+    <>
+      <div style={{position: 'absolute', left: 110, top: y, width: 720, transform: `scale(${k1})`, transformOrigin: 'left top'}}>
+        <div style={{fontFamily: 'Baloo2', fontWeight: 800, fontSize: 36, color: '#fff', WebkitTextStroke: `1px ${INK}`, marginBottom: 8}}>💬 {q.user ?? 'Khách hỏi'}</div>
+        <div style={{...bub('#fff'), fontSize: 50, lineHeight: 1.2}}>{q.q}</div>
+      </div>
+      <div style={{position: 'absolute', left: 170, top: y + 330, width: 720, transform: `scale(${k2}) rotate(1.5deg)`, transformOrigin: 'right top'}}>
+        <div style={{fontFamily: 'Baloo2', fontWeight: 800, fontSize: 36, color: '#ffe600', WebkitTextStroke: `1px ${INK}`, marginBottom: 8, textAlign: 'right'}}>TAP Store trả lời ✓</div>
+        <div style={{...bub('#ffe600'), fontSize: 48, lineHeight: 1.2}}>{q.a}</div>
+      </div>
+    </>
+  );
+};
+
+const DayBadge: React.FC<{day: number; total: number}> = ({day, total}) => {
+  const t = useT();
+  const k = pop(t, 0.1) || 0.01;
+  return (
+    <div style={{position: 'absolute', left: 540 - 230, top: 205, width: 460, textAlign: 'center', transform: `scale(${k}) rotate(-3deg)`, background: '#111', color: '#ffe600', border: '6px solid #fff', borderRadius: 40, padding: '2px 0', fontFamily: 'Baloo2', fontWeight: 800, fontSize: 56, boxShadow: '8px 10px 0 rgba(0,0,0,.35)', zIndex: 50}}>
+      NGÀY {day}/{total}
+    </div>
+  );
+};
+
 const SceneView: React.FC<{sc: MemeScene; idx: number}> = ({sc, idx}) => {
   const [c1, c2] = BG[sc.bg || (['pink', 'lime', 'blue', 'yellow', 'violet', 'orange'] as const)[idx % 6]];
   const mode = sc.mode || (sc.photo ? 'full' : 'none');
@@ -232,6 +282,8 @@ const SceneView: React.FC<{sc: MemeScene; idx: number}> = ({sc, idx}) => {
       )}
       {sc.title && <BigText y={ty} t0={sc.s + 0.1} lines={sc.title} size={ts} color={idx % 3 === 1 ? '#ffe600' : '#fff'} rot={idx % 2 ? 2 : -2} />}
       {sc.list && sc.list.map((it, i) => <Pill key={i} y={(sc.listY ?? 960) + i * 150} t0={sc.s + 0.5 + i * 0.5} n={i + 1} text={it} color={ACCENT[i % 4]} />)}
+      {sc.review && <ReviewCard r={sc.review} t0={sc.s + 0.3} />}
+      {sc.qa && <QA q={sc.qa} t0={sc.s + 0.3} />}
       {sc.note && <Note y={1330} t0={sc.s + 0.7} text={sc.note} />}
       {stickers.map((st, i) => <Sticker key={i} {...st} t0={st.t0 ?? sc.s + 0.3 + i * 0.25} />)}
     </SceneBox>
@@ -246,8 +298,9 @@ export const MemeVideo: React.FC<{spec: MemeSpec}> = ({spec}) => {
   return (
     <TCtx.Provider value={t}>
       <AbsoluteFill style={{background: BG.pink[0]}}>
-        <Audio src={staticFile(spec.voice)} />
+        {spec.voice && <Audio src={staticFile(spec.voice)} />}
         {spec.scenes.map((sc, i) => <SceneView key={i} sc={sc} idx={i} />)}
+        {spec.day != null && <DayBadge day={spec.day} total={spec.total ?? 100} />}
         <Caption caps={spec.caps} />
       </AbsoluteFill>
     </TCtx.Provider>

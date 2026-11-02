@@ -10,6 +10,7 @@ import {Video14} from './Video14';
 import {Video15} from './Video15';
 import {MemeVideo} from './MemeVideo';
 import {demo} from './memeSpecs/demo';
+import {series} from './memeSpecs/series';
 export const Root: React.FC = () => (
   <>
   <Composition id="Carousel" component={Carousel} durationInFrames={120} fps={30} width={1080} height={1350} defaultProps={{n: 1}} />
@@ -22,5 +23,6 @@ export const Root: React.FC = () => (
   <Composition id="Tips14" component={Video14} durationInFrames={786} fps={30} width={1080} height={1920} />
   <Composition id="Tips15" component={Video15} durationInFrames={909} fps={30} width={1080} height={1920} />
   <Composition id="MemeDemo" component={MemeVideo} durationInFrames={786} fps={30} width={1080} height={1920} defaultProps={{spec: demo}} />
+  <Composition id="Series100" component={MemeVideo} durationInFrames={540} fps={30} width={1080} height={1920} defaultProps={{spec: series}} />
   </>
 );
