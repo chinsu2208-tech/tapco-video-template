@@ -337,6 +337,26 @@ const Review2: React.FC<{x: number; y: number; w: number; t0: number; src: strin
 };
 
 
+// ---------- Anh/clip FULL 9:16 (nen toan khung, chu va sticker de len) ----------
+const FullPhoto: React.FC<{s: number; e: number; src: string; last?: boolean; children: React.ReactNode}> = ({s, e, src, last, children}) => {
+  const t = TNOW;
+  if (t < s - 0.02 || t > e + 0.02) return null;
+  const inP = ease((t - s) / 0.4), outP = last ? 0 : ease((t - (e - 0.35)) / 0.35);
+  const dx = (1 - inP) * 1000 - outP * 1100, rot = (1 - inP) * -6 - outP * 6;
+  const zoom = 1.04 + 0.07 * clamp((t - s) / (e - s));
+  return (
+    <AbsoluteFill style={{background: '#fffaf0'}}>
+      <div style={{position: 'absolute', inset: 0, overflow: 'hidden', transform: `translateX(${dx}px) rotate(${rot}deg)`}}>
+        <img src={staticFile(src)} style={{position: 'absolute', left: 0, top: 0, width: 1080, height: 1920, objectFit: 'cover', transform: `scale(${zoom})`, transformOrigin: '50% 42%'}} />
+        <div style={{position: 'absolute', left: 0, top: 0, width: 1080, height: 760, background: 'linear-gradient(to bottom, rgba(255,250,240,0.80) 0%, rgba(255,250,240,0.45) 55%, rgba(255,250,240,0) 100%)'}} />
+        <div style={{position: 'absolute', left: 0, top: 1380, width: 1080, height: 540, background: 'linear-gradient(to bottom, rgba(51,71,122,0) 0%, rgba(51,71,122,0.55) 100%)'}} />
+        <div style={{position: 'absolute', left: 36, top: 150, width: 1008, height: 1620, border: `5px dashed ${PINK}`, borderRadius: 36, opacity: 0.9}} />
+        {children}
+      </div>
+    </AbsoluteFill>
+  );
+};
+
 const CAPS: [number, number, string][] = [[0.51, 2.72, "Có một thứ bạn cùng bàn có thể để ý khi bạn bước vào lớp"], [2.72, 4.31, "mà gần như không bao giờ nói ra"], [4.31, 5.42, "Đó là mùi quần áo"], [5.42, 7.94, "Vấn đề là mình rất khó tự ngửi ra mùi của chính mình"], [7.94, 9.67, "Nên trước khi đi học"], [9.67, 11.55, "thử thêm một bước kiểm tra 10 giây"], [11.55, 12.91, "Cầm áo lên ngửi thử"], [12.91, 14.49, "Nếu là áo mặc lại, hoặc đồ phơi trong nhà"], [14.49, 16.07, "thì ngửi kỹ hơn một chút"], [16.07, 17.13, "Rồi tùy bạn chọn cách xử lý"], [17.13, 18.0, "có thể là thay áo khác"], [18.0, 20.74, "Hoặc dùng nước hoa vải như Baby hay Baby Chuchu 50ml"], [20.74, 21.69, "theo thông tin trên nhãn"], [21.69, 23.18, "Chỉ là một lựa chọn thôi nha"], [23.18, 24.28, "Làm vậy xong"], [24.28, 27.51, "bước vào lớp bạn không còn phải đoán xem bạn cùng bàn nghĩ gì nữa"], [27.51, 28.58, "Nghía giỏ hàng bên dưới nha"]];
 
 const CaptionX: React.FC = () => {
@@ -369,13 +389,12 @@ export const Video13: React.FC = () => {
       </svg>
       <Audio src={staticFile('dl/voice13.mp3')} />
 
-      <Scene s={0} e={5.4} bg={MINT} tab={SKY}>
+      <FullPhoto s={0} e={5.4} src="dl/i032.jpg">
         <Sticky x={CX} y={290} w={420} t0={0.1} text="mẹo đi học" color={BUTTER} rot={-3} font="Baloo2" size={48} />
         <Title x={CX} y={520} t0={0.6} lines={['Thứ bạn cùng bàn','để ý mà không nói']} size={64} hl={[1, 0, BUTTER]} />
-        <Polaroid x={CX} y={1010} t0={1.4} src="dl/i032.jpg" rot={2} note="trong lớp học" sc={1.15} />
         <CloudS x={150} y={810} size={130} t0={3.2} rot={-8} />
         <StarS x={830} y={820} size={110} t0={3.8} rot={10} />
-      </Scene>
+      </FullPhoto>
 
       <Scene s={5.4} e={9.6} bg={SKY} tab={PINK}>
         <Title x={CX} y={420} t0={5.5} lines={['Khó tự ngửi ra','mùi của mình']} size={66} hl={[1, 0, PINK]} />
@@ -392,18 +411,16 @@ export const Video13: React.FC = () => {
         <Check x={CX} y={1130} w={780} t0={17.0} text="Có thể thay áo khác" color={PINK} />
       </Scene>
 
-      <Scene s={17.97} e={24.3} bg={LAV} tab={BUTTER}>
+      <FullPhoto s={17.97} e={24.3} src="dl/i027.jpg">
         <Title x={CX} y={380} t0={18.1} lines={['Hoặc dùng','nước hoa vải']} size={66} hl={[1, 0, PINK]} />
         <Sticky x={CX} y={560} w={680} t0={20.5} text="Baby / Baby Chuchu 50ml, theo thông tin trên nhãn" color={BUTTER} rot={-2} font="Baloo2" size={38} />
-        <Polaroid x={CX} y={1090} t0={19.0} src="dl/i027.jpg" rot={3} note="chỉ là một lựa chọn" sc={0.95} />
         <StarS x={160} y={760} size={110} t0={22.0} rot={-10} />
-      </Scene>
+      </FullPhoto>
 
-      <Scene s={24.3} e={27.5} bg={PEACH} tab={CORAL}>
+      <FullPhoto s={24.3} e={27.5} src="dl/i031.jpg">
         <Title x={CX} y={400} t0={24.4} lines={['Vào lớp không','phải đoán nữa']} size={66} hl={[1, 0, BUTTER]} />
-        <Polaroid x={CX} y={1010} t0={25.0} src="dl/i031.jpg" rot={-2} note="ra cửa nè" sc={1.1} />
         <HeartS x={150} y={800} size={110} t0={26.0} rot={-10} />
-      </Scene>
+      </FullPhoto>
 
       <Scene s={27.5} e={29.264} bg={SKY} tab={PINK} last>
         <Sticky x={CX} y={480} w={700} t0={27.6} text="Thử bước kiểm tra 10 giây nha" color={BUTTER} rot={-2} font="Baloo2" size={48} />

@@ -337,6 +337,26 @@ const Review2: React.FC<{x: number; y: number; w: number; t0: number; src: strin
 };
 
 
+// ---------- Anh/clip FULL 9:16 (nen toan khung, chu va sticker de len) ----------
+const FullPhoto: React.FC<{s: number; e: number; src: string; last?: boolean; children: React.ReactNode}> = ({s, e, src, last, children}) => {
+  const t = TNOW;
+  if (t < s - 0.02 || t > e + 0.02) return null;
+  const inP = ease((t - s) / 0.4), outP = last ? 0 : ease((t - (e - 0.35)) / 0.35);
+  const dx = (1 - inP) * 1000 - outP * 1100, rot = (1 - inP) * -6 - outP * 6;
+  const zoom = 1.04 + 0.07 * clamp((t - s) / (e - s));
+  return (
+    <AbsoluteFill style={{background: '#fffaf0'}}>
+      <div style={{position: 'absolute', inset: 0, overflow: 'hidden', transform: `translateX(${dx}px) rotate(${rot}deg)`}}>
+        <img src={staticFile(src)} style={{position: 'absolute', left: 0, top: 0, width: 1080, height: 1920, objectFit: 'cover', transform: `scale(${zoom})`, transformOrigin: '50% 42%'}} />
+        <div style={{position: 'absolute', left: 0, top: 0, width: 1080, height: 760, background: 'linear-gradient(to bottom, rgba(255,250,240,0.80) 0%, rgba(255,250,240,0.45) 55%, rgba(255,250,240,0) 100%)'}} />
+        <div style={{position: 'absolute', left: 0, top: 1380, width: 1080, height: 540, background: 'linear-gradient(to bottom, rgba(51,71,122,0) 0%, rgba(51,71,122,0.55) 100%)'}} />
+        <div style={{position: 'absolute', left: 36, top: 150, width: 1008, height: 1620, border: `5px dashed ${PINK}`, borderRadius: 36, opacity: 0.9}} />
+        {children}
+      </div>
+    </AbsoluteFill>
+  );
+};
+
 const CAPS: [number, number, string][] = [[0.0, 3.83, "Đừng vội mua son hay kem nền chỉ vì nhìn mạch máu cổ tay thấy xanh hay xanh lá nha"], [3.83, 5.85, "Mẹo này chỉ là bước gợi ý đầu thôi"], [5.85, 6.45, "Muốn chắc hơn"], [6.45, 8.28, "bạn thử thêm ba phép trước khi chốt đơn"], [8.28, 8.42, "Một"], [8.42, 10.81, "nhìn mạch máu cổ tay dưới ánh sáng tự nhiên"], [10.81, 10.95, "Hai"], [10.95, 13.36, "so sánh viền trắng và viền vàng đặt gần mặt"], [13.36, 15.54, "xem cái nào nhìn da sáng và dễ chịu hơn"], [15.54, 17.11, "Ba, quẹt swatch thật ở hàm"], [17.11, 17.95, "rồi xem ngoài sáng"], [17.95, 20.56, "Ba phép cùng cho một hướng thì yên tâm hơn nhiều"], [20.56, 21.35, "đỡ mua xong để đó"], [21.35, 22.19, "Đi học hay đi date"], [22.19, 23.92, "chọn đồ hợp với mình vẫn nên thử thật"], [23.92, 25.18, "Nghía giỏ hàng bên dưới nha"]];
 
 const CaptionX: React.FC = () => {
@@ -369,13 +389,12 @@ export const Video14: React.FC = () => {
       </svg>
       <Audio src={staticFile('dl/voice14.mp3')} />
 
-      <Scene s={0} e={3.8} bg={PEACH} tab={CORAL}>
+      <FullPhoto s={0} e={3.8} src="dl/i022.jpg">
         <Sticky x={CX} y={290} w={460} t0={0.1} text="mẹo chọn màu" color={BUTTER} rot={-3} font="Baloo2" size={48} />
         <Title x={CX} y={520} t0={0.4} lines={['Đừng vội mua','son hay kem nền']} size={70} hl={[1, 0, PINK]} />
-        <Polaroid x={CX} y={1010} t0={1.0} src="dl/i022.jpg" rot={-2} note="thử thật nha" sc={1.15} />
         <FlowerS x={150} y={820} size={120} t0={2.6} rot={-10} />
         <StarS x={830} y={830} size={110} t0={3.0} rot={10} />
-      </Scene>
+      </FullPhoto>
 
       <Scene s={3.8} e={6.4} bg={LAV} tab={PINK}>
         <Burst x={CX} y={760} t0={4.0} text={'gợi ý\nđầu'} size={330} color={'#8aa0e0'} />
@@ -389,12 +408,12 @@ export const Video14: React.FC = () => {
         <CloudS x={CX} y={1150} size={260} t0={9.2} rot={-4} />
       </Scene>
 
-      <Scene s={10.9} e={15.64} bg={BUTTER} tab={CORAL}>
+      <FullPhoto s={10.9} e={15.64} src="dl/i025.jpg">
         <Burst x={200} y={420} t0={11.0} text={'Phép\n2'} size={240} color={CORAL} />
         <Title x={620} y={430} t0={11.4} lines={['Viền trắng','và viền vàng']} size={62} hl={[1, 0, PINK]} />
-        <Sticky x={CX} y={700} w={700} t0={12.8} text="đặt gần mặt, xem cái nào da sáng và dễ chịu hơn" color={'#fff'} rot={-2} font="Baloo2" size={40} />
-        <Polaroid x={CX} y={1170} t0={13.8} src="dl/i025.jpg" rot={3} note="so thử nè" sc={0.72} />
-      </Scene>
+        <Sticky x={CX} y={1130} w={700} t0={12.8} text="đặt gần mặt, xem cái nào da sáng và dễ chịu hơn" color={'#fff'} rot={-2} font="Baloo2" size={40} />
+        
+      </FullPhoto>
 
       <Scene s={15.64} e={20.54} bg={SKY} tab={PINK}>
         <Burst x={200} y={420} t0={15.8} text={'Phép\n3'} size={240} color={'#8aa0e0'} />
@@ -403,12 +422,12 @@ export const Video14: React.FC = () => {
         <LipsS x={CX} y={1130} size={240} t0={18.4} rot={-6} />
       </Scene>
 
-      <Scene s={20.54} e={23.93} bg={PEACH} tab={CORAL}>
+      <FullPhoto s={20.54} e={23.93} src="dl/i016.jpg">
         <Title x={CX} y={400} t0={20.6} lines={['Ba phép cùng','một hướng']} size={70} hl={[1, 0, PINK]} />
-        <Check x={CX} y={640} w={780} t0={21.0} text="Yên tâm hơn nhiều" />
-        <Check x={CX} y={800} w={780} t0={22.0} text="Đỡ mua xong để đó" color={BUTTER} />
-        <Polaroid x={CX} y={1170} t0={22.4} src="dl/i016.jpg" rot={-3} note="thử thật" sc={0.72} />
-      </Scene>
+        <Check x={CX} y={1130} w={780} t0={21.0} text="Yên tâm hơn nhiều" />
+        <Check x={CX} y={1280} w={780} t0={22.0} text="Đỡ mua xong để đó" color={BUTTER} />
+        
+      </FullPhoto>
 
       <Scene s={23.93} e={26.024} bg={LAV} tab={BUTTER} last>
         <Sticky x={CX} y={480} w={700} t0={24.0} text="Đi học hay đi date, chọn đồ hợp với mình" color={BUTTER} rot={-2} font="Baloo2" size={44} />
