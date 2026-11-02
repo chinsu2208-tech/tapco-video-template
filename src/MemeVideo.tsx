@@ -1,5 +1,5 @@
 import React, {createContext, useContext, useEffect, useState} from 'react';
-import {AbsoluteFill, Audio, Img, OffthreadVideo, Loop, staticFile, useCurrentFrame, useVideoConfig, delayRender, continueRender} from 'remotion';
+import {AbsoluteFill, Audio, Img, OffthreadVideo, Loop, Sequence, staticFile, useCurrentFrame, useVideoConfig, delayRender, continueRender} from 'remotion';
 
 /**
  * Template "Sticker meme Gen Z" (kênh phụ TAP Store) — 1080x1920, 30fps.
@@ -15,7 +15,7 @@ export type MemeScene = {
   bg?: 'pink' | 'lime' | 'blue' | 'yellow' | 'violet' | 'orange';
   photo?: string; // dl/IMGxxx.jpg hoặc dl/CLIPxxx.mp4 (9:16)
   photos?: string[]; // nhiều ảnh/clip xoay đều trong cảnh (cắt cứng), ưu tiên hơn photo
-  mode?: 'full' | 'card' | 'none';
+  mode?: 'full' | 'card' | 'bleed' | 'none'; // bleed = clip tràn màn, chuyển mờ dần, chữ thẳng, không viền
   title?: string[]; // 1-3 dòng chữ to
   titleY?: number; // mặc định 430
   titleSize?: number; // mặc định 88
@@ -67,8 +67,13 @@ const useFonts = () => {
 };
 
 // ---------- Scene wrappers (cắt "punch", không trượt) ----------
-const SceneBox: React.FC<{s: number; e: number; children: React.ReactNode}> = ({s, e, children}) => {
+const SceneBox: React.FC<{s: number; e: number; soft?: boolean; children: React.ReactNode}> = ({s, e, soft, children}) => {
   const t = useT();
+  if (soft) {
+    if (t < s - 0.2 - 0.01 || t > e + 0.01) return null;
+    const o = s <= 0.01 ? 1 : clamp((t - (s - 0.2)) / 0.2);
+    return <AbsoluteFill style={{opacity: o}}>{children}</AbsoluteFill>;
+  }
   if (t < s - 0.01 || t > e + 0.01) return null;
   const k = clamp((t - s) / 0.22);
   const punch = 1.09 - 0.09 * (1 - Math.pow(1 - k, 3));
@@ -96,19 +101,47 @@ const Media: React.FC<{src: string; style: React.CSSProperties}> = ({src, style}
     <Img src={staticFile(src)} style={{objectFit: 'cover', ...style}} />
   );
 
+// Clip tràn màn hình: mỗi clip phát từ đầu (không lặp), chuyển clip bằng mờ dần 0.2s, zoom rất nhẹ
+const BleedMedia: React.FC<{s: number; e: number; photos: string[]}> = ({s, e, photos}) => {
+  const t = useT();
+  const {fps} = useVideoConfig();
+  const n = photos.length;
+  const seg = (e - s) / n;
+  const zoom = 1.0 + 0.04 * clamp((t - s) / (e - s));
+  return (
+    <AbsoluteFill style={{transform: `scale(${zoom})`, transformOrigin: '50% 45%', filter: 'saturate(1.06) contrast(1.03)'}}>
+      {photos.map((src, i) => {
+        const st = Math.max(0, s + i * seg - 0.2), en = i === n - 1 ? e + 0.3 : s + (i + 1) * seg;
+        if (t < st || t > en + 0.01) return null;
+        const o = i === 0 && s <= 0.01 ? 1 : clamp((t - st) / 0.2);
+        const isVid = /\.(mp4|mov)$/i.test(src);
+        return (
+          <AbsoluteFill key={i} style={{opacity: o}}>
+            {isVid ? (
+              <Sequence from={Math.round(st * fps)}><OffthreadVideo src={staticFile(src)} muted style={{width: 1080, height: 1920, objectFit: 'cover'}} /></Sequence>
+            ) : (
+              <Img src={staticFile(src)} style={{width: 1080, height: 1920, objectFit: 'cover'}} />
+            )}
+          </AbsoluteFill>
+        );
+      })}
+    </AbsoluteFill>
+  );
+};
+
 // ---------- Text ----------
 const pop = (t: number, t0: number) => {
   const p = clamp((t - t0) / 0.3);
   return p <= 0 ? 0 : backOut(p);
 };
 
-const BigText: React.FC<{y: number; t0: number; lines: string[]; size: number; color?: string; rot?: number}> = ({y, t0, lines, size, color = '#fff', rot = -2}) => {
+const BigText: React.FC<{y: number; t0: number; lines: string[]; size: number; color?: string; rot?: number; flat?: boolean}> = ({y, t0, lines, size, color = '#fff', rot = -2, flat}) => {
   const t = useT();
   const p = pop(t, t0);
   if (p <= 0) return null;
   const lh = size * 1.0;
   return (
-    <div style={{position: 'absolute', left: 90, width: 900, top: y - (lines.length * lh) / 2, textAlign: 'center', transform: `scale(${p}) rotate(${rot + Math.sin(t * 5) * 0.6}deg)`}}>
+    <div style={{position: 'absolute', left: 90, width: 900, top: y - (lines.length * lh) / 2, textAlign: 'center', transform: `scale(${p}) rotate(${flat ? 0 : rot + Math.sin(t * 5) * 0.6}deg)`}}>
       {lines.map((l, i) => (
         <div key={i} style={{position: 'relative', height: lh, lineHeight: `${lh}px`, fontFamily: 'Baloo2', fontWeight: 800, fontSize: size}}>
           <span style={{position: 'absolute', left: 0, right: 0, color: INK, transform: 'translate(8px,9px)', WebkitTextStroke: `${size * 0.2}px ${INK}`}}>{l}</span>
@@ -120,24 +153,24 @@ const BigText: React.FC<{y: number; t0: number; lines: string[]; size: number; c
   );
 };
 
-const Pill: React.FC<{y: number; t0: number; n: number; text: string; color: string}> = ({y, t0, n, text, color}) => {
+const Pill: React.FC<{y: number; t0: number; n: number; text: string; color: string; flat?: boolean}> = ({y, t0, n, text, color, flat}) => {
   const t = useT();
   const p = pop(t, t0);
   if (p <= 0) return null;
   return (
-    <div style={{position: 'absolute', left: 120, width: 780, top: y, display: 'flex', alignItems: 'center', gap: 20, transform: `scale(${p}) rotate(${n % 2 ? -1.5 : 1.5}deg)`, transformOrigin: 'left center'}}>
+    <div style={{position: 'absolute', left: 120, width: 780, top: y, display: 'flex', alignItems: 'center', gap: 20, transform: `scale(${p}) rotate(${flat ? 0 : n % 2 ? -1.5 : 1.5}deg)`, transformOrigin: 'left center'}}>
       <div style={{flex: 'none', width: 92, height: 92, borderRadius: '50%', background: color, border: `6px solid ${INK}`, boxShadow: `6px 7px 0 ${INK}`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'Baloo2', fontWeight: 800, fontSize: 56, color: INK}}>{n}</div>
       <div style={{flex: 1, background: '#fff', border: `6px solid ${INK}`, borderRadius: 28, boxShadow: `8px 9px 0 ${INK}`, padding: '12px 22px', fontFamily: 'Baloo2', fontWeight: 800, fontSize: 46, lineHeight: 1.08, color: INK}}>{text}</div>
     </div>
   );
 };
 
-const Note: React.FC<{y: number; t0: number; text: string}> = ({y, t0, text}) => {
+const Note: React.FC<{y: number; t0: number; text: string; flat?: boolean}> = ({y, t0, text, flat}) => {
   const t = useT();
   const p = pop(t, t0);
   if (p <= 0) return null;
   return (
-    <div style={{position: 'absolute', left: 130, width: 720, top: y, transform: `scale(${p}) rotate(2deg)`}}>
+    <div style={{position: 'absolute', left: 130, width: 720, top: y, transform: `scale(${p}) rotate(${flat ? 0 : 2}deg)`}}>
       <div style={{background: '#ffe600', border: `6px solid ${INK}`, borderRadius: 18, boxShadow: `8px 9px 0 ${INK}`, padding: '14px 24px', fontFamily: 'Baloo2', fontWeight: 800, fontSize: 44, lineHeight: 1.1, color: INK, textAlign: 'center'}}>{text}</div>
     </div>
   );
@@ -266,8 +299,15 @@ const SceneView: React.FC<{sc: MemeScene; idx: number}> = ({sc, idx}) => {
   const ty = sc.titleY ?? (mode === 'none' ? 640 : 430);
   const ts = sc.titleSize ?? 88;
   return (
-    <SceneBox s={sc.s} e={sc.e}>
+    <SceneBox s={sc.s} e={sc.e} soft={mode === 'bleed'}>
       <Halftone c1={c1} c2={c2} />
+      {mode === 'bleed' && (sc.photos?.length || sc.photo) && (
+        <>
+          <BleedMedia s={sc.s} e={sc.e} photos={sc.photos?.length ? sc.photos : [sc.photo as string]} />
+          <div style={{position: 'absolute', left: 0, top: 0, width: 1080, height: 720, background: 'linear-gradient(to bottom, rgba(0,0,0,0.42) 0%, rgba(0,0,0,0.18) 55%, rgba(0,0,0,0) 100%)'}} />
+          <div style={{position: 'absolute', left: 0, top: 1180, width: 1080, height: 740, background: 'linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.55) 100%)'}} />
+        </>
+      )}
       {mode === 'full' && media && (
         <>
           <Media key={media} src={media} style={{position: 'absolute', left: 0, top: 0, width: 1080, height: 1920, transform: `scale(${zoom})`}} />
@@ -283,11 +323,11 @@ const SceneView: React.FC<{sc: MemeScene; idx: number}> = ({sc, idx}) => {
           </div>
         </div>
       )}
-      {sc.title && <BigText y={ty} t0={sc.s + 0.1} lines={sc.title} size={ts} color={idx % 3 === 1 ? '#ffe600' : '#fff'} rot={idx % 2 ? 2 : -2} />}
-      {sc.list && sc.list.map((it, i) => <Pill key={i} y={(sc.listY ?? 960) + i * 150} t0={sc.listAt?.[i] ?? sc.s + 0.5 + i * 0.5} n={i + 1} text={it} color={ACCENT[i % 4]} />)}
+      {sc.title && <BigText y={ty} t0={sc.s + 0.1} lines={sc.title} size={ts} color={idx % 3 === 1 ? '#ffe600' : '#fff'} rot={idx % 2 ? 2 : -2} flat={mode === 'bleed'} />}
+      {sc.list && sc.list.map((it, i) => <Pill key={i} y={(sc.listY ?? 960) + i * 150} t0={sc.listAt?.[i] ?? sc.s + 0.5 + i * 0.5} n={i + 1} text={it} color={ACCENT[i % 4]} flat={mode === 'bleed'} />)}
       {sc.review && <ReviewCard r={sc.review} t0={sc.s + 0.3} />}
       {sc.qa && <QA q={sc.qa} t0={sc.s + 0.3} />}
-      {sc.note && <Note y={1330} t0={sc.s + 0.7} text={sc.note} />}
+      {sc.note && <Note y={1330} t0={sc.s + 0.7} text={sc.note} flat={mode === 'bleed'} />}
       {stickers.map((st, i) => <Sticker key={i} {...st} t0={st.t0 ?? sc.s + 0.3 + i * 0.25} />)}
     </SceneBox>
   );
