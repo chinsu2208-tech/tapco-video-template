@@ -23,6 +23,6 @@ export const Root: React.FC = () => (
   <Composition id="Tips14" component={Video14} durationInFrames={786} fps={30} width={1080} height={1920} />
   <Composition id="Tips15" component={Video15} durationInFrames={909} fps={30} width={1080} height={1920} />
   <Composition id="MemeDemo" component={MemeVideo} durationInFrames={786} fps={30} width={1080} height={1920} defaultProps={{spec: demo}} />
-  <Composition id="Series100" component={MemeVideo} durationInFrames={540} fps={30} width={1080} height={1920} defaultProps={{spec: series}} />
+  <Composition id="Series100" component={MemeVideo} durationInFrames={825} fps={30} width={1080} height={1920} defaultProps={{spec: series}} />
   </>
 );
