@@ -15,7 +15,7 @@ export type MemeScene = {
   bg?: 'pink' | 'lime' | 'blue' | 'yellow' | 'violet' | 'orange';
   photo?: string; // dl/IMGxxx.jpg hoặc dl/CLIPxxx.mp4 (9:16)
   photos?: string[]; // nhiều ảnh/clip xoay đều trong cảnh (cắt cứng), ưu tiên hơn photo
-  mode?: 'full' | 'card' | 'bleed' | 'none'; // bleed = clip tràn màn, chuyển mờ dần, chữ thẳng, không viền
+  mode?: 'full' | 'card' | 'bleed' | 'frame' | 'none'; // bleed = clip tràn màn, chuyển mờ dần, chữ thẳng, không viền
   title?: string[]; // 1-3 dòng chữ to
   titleY?: number; // mặc định 430
   titleSize?: number; // mặc định 88
@@ -294,13 +294,24 @@ const SceneView: React.FC<{sc: MemeScene; idx: number}> = ({sc, idx}) => {
   const t = useT();
   const media = sc.photos && sc.photos.length ? sc.photos[Math.min(sc.photos.length - 1, Math.max(0, Math.floor((t - sc.s) / ((sc.e - sc.s) / sc.photos.length))))] : sc.photo;
   const mode = sc.mode || (media ? 'full' : 'none');
+  const flat = mode === 'bleed' || mode === 'frame';
   const zoom = 1.03 + 0.07 * clamp((t - sc.s) / (sc.e - sc.s));
   const stickers = sc.stickers || AUTO[idx % AUTO.length];
   const ty = sc.titleY ?? (mode === 'none' ? 640 : 430);
   const ts = sc.titleSize ?? 88;
   return (
-    <SceneBox s={sc.s} e={sc.e} soft={mode === 'bleed'}>
+    <SceneBox s={sc.s} e={sc.e} soft={flat}>
       <Halftone c1={c1} c2={c2} />
+      {mode === 'frame' && (sc.photos?.length || sc.photo) && (
+        <div style={{position: 'absolute', left: 108, top: 192, width: 864, height: 1536, borderRadius: 56, overflow: 'hidden', boxShadow: '0 24px 60px rgba(0,0,0,0.28)'}}>
+          <div style={{position: 'absolute', left: 0, top: 0, width: 1080, height: 1920, transform: 'scale(0.8)', transformOrigin: '0 0'}}>
+            <BleedMedia s={sc.s} e={sc.e} photos={sc.photos?.length ? sc.photos : [sc.photo as string]} />
+          </div>
+          <div style={{position: 'absolute', left: 0, top: 0, width: 864, height: 560, background: 'linear-gradient(to bottom, rgba(0,0,0,0.40) 0%, rgba(0,0,0,0) 100%)'}} />
+          <div style={{position: 'absolute', left: 0, top: 1000, width: 864, height: 536, background: 'linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5) 100%)'}} />
+          <div style={{position: 'absolute', inset: 0, borderRadius: 56, border: '8px solid rgba(255,255,255,0.92)'}} />
+        </div>
+      )}
       {mode === 'bleed' && (sc.photos?.length || sc.photo) && (
         <>
           <BleedMedia s={sc.s} e={sc.e} photos={sc.photos?.length ? sc.photos : [sc.photo as string]} />
@@ -323,11 +334,11 @@ const SceneView: React.FC<{sc: MemeScene; idx: number}> = ({sc, idx}) => {
           </div>
         </div>
       )}
-      {sc.title && <BigText y={ty} t0={sc.s + 0.1} lines={sc.title} size={ts} color={idx % 3 === 1 ? '#ffe600' : '#fff'} rot={idx % 2 ? 2 : -2} flat={mode === 'bleed'} />}
-      {sc.list && sc.list.map((it, i) => <Pill key={i} y={(sc.listY ?? 960) + i * 150} t0={sc.listAt?.[i] ?? sc.s + 0.5 + i * 0.5} n={i + 1} text={it} color={ACCENT[i % 4]} flat={mode === 'bleed'} />)}
+      {sc.title && <BigText y={ty} t0={sc.s + 0.1} lines={sc.title} size={ts} color={idx % 3 === 1 ? '#ffe600' : '#fff'} rot={idx % 2 ? 2 : -2} flat={flat} />}
+      {sc.list && sc.list.map((it, i) => <Pill key={i} y={(sc.listY ?? 960) + i * 150} t0={sc.listAt?.[i] ?? sc.s + 0.5 + i * 0.5} n={i + 1} text={it} color={ACCENT[i % 4]} flat={flat} />)}
       {sc.review && <ReviewCard r={sc.review} t0={sc.s + 0.3} />}
       {sc.qa && <QA q={sc.qa} t0={sc.s + 0.3} />}
-      {sc.note && <Note y={1330} t0={sc.s + 0.7} text={sc.note} flat={mode === 'bleed'} />}
+      {sc.note && <Note y={1330} t0={sc.s + 0.7} text={sc.note} flat={flat} />}
       {stickers.map((st, i) => <Sticker key={i} {...st} t0={st.t0 ?? sc.s + 0.3 + i * 0.25} />)}
     </SceneBox>
   );
