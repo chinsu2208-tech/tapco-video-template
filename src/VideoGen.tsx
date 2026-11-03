@@ -373,7 +373,7 @@ const RItem: React.FC<{it: Item}> = ({it}) => {
     case 'title': return <Title x={it.x ?? CX} y={it.y} t0={it.t0} lines={it.lines} size={it.size ?? 64} hl={it.hl ? [it.hl[0], 0, cc(it.hl[1])] : undefined} />;
     case 'sticky': return <Sticky x={it.x ?? CX} y={it.y} w={it.w ?? 640} t0={it.t0} text={it.text} color={cc(it.color)} rot={it.rot ?? -2} font={it.font ?? 'Baloo2'} size={it.size ?? 40} />;
     case 'check': return <Check x={it.x ?? CX} y={it.y} w={it.w ?? 780} t0={it.t0} text={it.text} color={cc(it.color)} />;
-    case 'stk': { const S = STK[it.n]; return <S x={it.x} y={it.y} size={it.size ?? 130} t0={it.t0} rot={it.rot ?? 0} hide={it.hide} />; }
+    case 'stk': { const S = STK[it.n]; return <S x={it.x} y={it.y} size={it.size ?? 130} t0={it.t0} rot={it.rot ?? 0} hide={it.hide ?? undefined} />; }
     case 'cross': return <LipsS x={it.x} y={it.y} size={it.size ?? 220} t0={it.t0} cross={it.cross} />;
     case 'burst': return <Burst x={it.x} y={it.y} t0={it.t0} text={it.text} size={it.size ?? 230} color={cc(it.color)} />;
     case 'hand': return <Hand x={it.x ?? CX} y={it.y} t0={it.t0} text={it.text} size={it.size ?? 54} color={cc(it.color)} w={it.w ?? 760} />;

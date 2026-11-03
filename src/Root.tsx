@@ -16,6 +16,14 @@ import {spec as s33} from './specs/v33';
 import {spec as s34} from './specs/v34';
 import {spec as s2} from './specs/v2';
 import {spec as s35} from './specs/v35';
+import {spec as s36} from './specs/v36';
+import {spec as s37} from './specs/v37';
+import {spec as s38} from './specs/v38';
+import {spec as s39} from './specs/v39';
+import {spec as s40} from './specs/v40';
+import {spec as s41} from './specs/v41';
+import {spec as s42} from './specs/v42';
+import {spec as s43} from './specs/v43';
 import {VideoGen} from './VideoGen';
 import {MemeVideo} from './MemeVideo';
 import {demo} from './memeSpecs/demo';
@@ -41,5 +49,13 @@ export const Root: React.FC = () => (
   <Composition id="Gen34" component={VideoGen} durationInFrames={807} fps={30} width={1080} height={1920} defaultProps={{spec: s34}} />
   <Composition id="Gen2" component={VideoGen} durationInFrames={912} fps={30} width={1080} height={1920} defaultProps={{spec: s2}} />
   <Composition id="Gen35" component={VideoGen} durationInFrames={973} fps={30} width={1080} height={1920} defaultProps={{spec: s35}} />
+  <Composition id="Gen36" component={VideoGen} durationInFrames={935} fps={30} width={1080} height={1920} defaultProps={{spec: s36}} />
+  <Composition id="Gen37" component={VideoGen} durationInFrames={828} fps={30} width={1080} height={1920} defaultProps={{spec: s37}} />
+  <Composition id="Gen38" component={VideoGen} durationInFrames={801} fps={30} width={1080} height={1920} defaultProps={{spec: s38}} />
+  <Composition id="Gen39" component={VideoGen} durationInFrames={857} fps={30} width={1080} height={1920} defaultProps={{spec: s39}} />
+  <Composition id="Gen40" component={VideoGen} durationInFrames={777} fps={30} width={1080} height={1920} defaultProps={{spec: s40}} />
+  <Composition id="Gen41" component={VideoGen} durationInFrames={965} fps={30} width={1080} height={1920} defaultProps={{spec: s41}} />
+  <Composition id="Gen42" component={VideoGen} durationInFrames={952} fps={30} width={1080} height={1920} defaultProps={{spec: s42}} />
+  <Composition id="Gen43" component={VideoGen} durationInFrames={807} fps={30} width={1080} height={1920} defaultProps={{spec: s43}} />
   </>
 );
