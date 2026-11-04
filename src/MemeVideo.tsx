@@ -221,7 +221,7 @@ const Caption: React.FC<{caps: [number, number, string][]}> = ({caps}) => {
   const prog = clamp((t - c[0]) / Math.max(0.1, c[1] - c[0]));
   const p = clamp((t - c[0]) / 0.12);
   return (
-    <div style={{position: 'absolute', left: 110, width: 800, top: 1500, minHeight: 150, display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center', opacity: p, transform: `scale(${0.92 + 0.08 * p})`}}>
+    <div style={{position: 'absolute', left: 110, width: 800, top: 1190, minHeight: 150, display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center', opacity: p, transform: `scale(${0.92 + 0.08 * p})`}}>
       <div style={{fontFamily: 'Baloo2', fontWeight: 800, fontSize: 56, lineHeight: 1.08}}>
         {words.map((w, i) => {
           const from = acc / total; acc += w.length; const to = acc / total;
@@ -335,10 +335,10 @@ const SceneView: React.FC<{sc: MemeScene; idx: number}> = ({sc, idx}) => {
         </div>
       )}
       {sc.title && <BigText y={ty} t0={sc.s + 0.1} lines={sc.title} size={ts} color={idx % 3 === 1 ? '#ffe600' : '#fff'} rot={idx % 2 ? 2 : -2} flat={flat} />}
-      {sc.list && sc.list.map((it, i) => <Pill key={i} y={(sc.listY ?? 960) + i * 150} t0={sc.listAt?.[i] ?? sc.s + 0.5 + i * 0.5} n={i + 1} text={it} color={ACCENT[i % 4]} flat={flat} />)}
+      {sc.list && sc.list.map((it, i) => <Pill key={i} y={Math.min(sc.listY ?? 960, 1040 - (sc.list!.length - 1) * 150) + i * 150} t0={sc.listAt?.[i] ?? sc.s + 0.5 + i * 0.5} n={i + 1} text={it} color={ACCENT[i % 4]} flat={flat} />)}
       {sc.review && <ReviewCard r={sc.review} t0={sc.s + 0.3} />}
       {sc.qa && <QA q={sc.qa} t0={sc.s + 0.3} />}
-      {sc.note && <Note y={1330} t0={sc.s + 0.7} text={sc.note} flat={flat} />}
+      {sc.note && <Note y={1050} t0={sc.s + 0.7} text={sc.note} flat={flat} />}
       {stickers.map((st, i) => <Sticker key={i} {...st} t0={st.t0 ?? sc.s + 0.3 + i * 0.25} />)}
     </SceneBox>
   );
