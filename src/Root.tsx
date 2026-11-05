@@ -25,6 +25,7 @@ import {spec as s41} from './specs/v41';
 import {spec as s42} from './specs/v42';
 import {spec as s43} from './specs/v43';
 import {spec as s44} from './specs/v44';
+import {spec as s23} from './specs/v23';
 import {VideoGen} from './VideoGen';
 import {MemeVideo} from './MemeVideo';
 import {demo} from './memeSpecs/demo';
@@ -59,5 +60,6 @@ export const Root: React.FC = () => (
   <Composition id="Gen42" component={VideoGen} durationInFrames={952} fps={30} width={1080} height={1920} defaultProps={{spec: s42}} />
   <Composition id="Gen43" component={VideoGen} durationInFrames={807} fps={30} width={1080} height={1920} defaultProps={{spec: s43}} />
   <Composition id="Gen44" component={VideoGen} durationInFrames={915} fps={30} width={1080} height={1920} defaultProps={{spec: s44}} />
+  <Composition id="Gen23" component={VideoGen} durationInFrames={870} fps={30} width={1080} height={1920} defaultProps={{spec: s23}} />
   </>
 );
