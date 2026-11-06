@@ -18,6 +18,12 @@ import {tap32} from './memeSpecs/tap32';
 import {tap33} from './memeSpecs/tap33';
 import {tap34} from './memeSpecs/tap34';
 import {tap39} from './memeSpecs/tap39';
+import {tap40} from './memeSpecs/tap40';
+import {tap41} from './memeSpecs/tap41';
+import {tap42} from './memeSpecs/tap42';
+import {tap43} from './memeSpecs/tap43';
+import {tap44} from './memeSpecs/tap44';
+import {tap45} from './memeSpecs/tap45';
 import {tap4} from './memeSpecs/tap4';
 import {tap5} from './memeSpecs/tap5';
 import {tap7} from './memeSpecs/tap7';
@@ -47,6 +53,12 @@ export const Root: React.FC = () => (
   <Composition id="MemeTap33" component={MemeVideo} durationInFrames={717} fps={30} width={1080} height={1920} defaultProps={{spec: tap33}} />
   <Composition id="MemeTap34" component={MemeVideo} durationInFrames={798} fps={30} width={1080} height={1920} defaultProps={{spec: tap34}} />
   <Composition id="MemeTap39" component={MemeVideo} durationInFrames={873} fps={30} width={1080} height={1920} defaultProps={{spec: tap39}} />
+  <Composition id="MemeTap40" component={MemeVideo} durationInFrames={792} fps={30} width={1080} height={1920} defaultProps={{spec: tap40}} />
+  <Composition id="MemeTap41" component={MemeVideo} durationInFrames={981} fps={30} width={1080} height={1920} defaultProps={{spec: tap41}} />
+  <Composition id="MemeTap42" component={MemeVideo} durationInFrames={968} fps={30} width={1080} height={1920} defaultProps={{spec: tap42}} />
+  <Composition id="MemeTap43" component={MemeVideo} durationInFrames={822} fps={30} width={1080} height={1920} defaultProps={{spec: tap43}} />
+  <Composition id="MemeTap44" component={MemeVideo} durationInFrames={915} fps={30} width={1080} height={1920} defaultProps={{spec: tap44}} />
+  <Composition id="MemeTap45" component={MemeVideo} durationInFrames={983} fps={30} width={1080} height={1920} defaultProps={{spec: tap45}} />
   <Composition id="MemeTap4" component={MemeVideo} durationInFrames={1380} fps={30} width={1080} height={1920} defaultProps={{spec: tap4}} />
   <Composition id="MemeTap5" component={MemeVideo} durationInFrames={942} fps={30} width={1080} height={1920} defaultProps={{spec: tap5}} />
   <Composition id="MemeTap7" component={MemeVideo} durationInFrames={1061} fps={30} width={1080} height={1920} defaultProps={{spec: tap7}} />
