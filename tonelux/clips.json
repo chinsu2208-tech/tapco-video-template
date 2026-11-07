@@ -1,0 +1,14 @@
+{
+  "_note": "Kho b-roll Tonelux. Nguồn Drive: https://drive.google.com/drive/folders/1e8Ha_gDtucfXs9fW4eonzelkLBAw427A (scenes2 = buổi tư vấn khách nam, v2 = buổi test makeup + khách nữ). Tải bằng scripts/fetch-broll.sh, clip nằm ở public/tlv/lib/<s2|v2>/canh_XX.mp4. Đều 1080x1920.",
+  "zips": {"s2": "1k0puXW1h-d25Nb_ZOzeg0Lj6sS99VOEr", "v2": "1UO1sIWxo2vBDhPHHXlqBpTlH-fYHP4V_"},
+  "categories": {
+    "drape": {"mo_ta": "thử vải drape trước gương", "clips": ["s2/canh_05", "s2/canh_09", "s2/canh_10", "s2/canh_14", "s2/canh_15", "s2/canh_16", "s2/canh_17", "s2/canh_18", "v2/canh_09", "v2/canh_11", "v2/canh_14"]},
+    "tu-van": {"mo_ta": "chuyên viên tư vấn tại bàn", "clips": ["s2/canh_04", "s2/canh_06", "s2/canh_07", "s2/canh_11", "s2/canh_12", "s2/canh_13", "v2/canh_08", "v2/canh_13", "v2/canh_16", "v2/canh_19"]},
+    "tai-lieu": {"mo_ta": "tài liệu, vòng màu, bảng phân tích trên bàn", "clips": ["s2/canh_02", "s2/canh_03"]},
+    "the-mau": {"mo_ta": "cận cảnh thẻ màu / bảng màu theo mùa", "clips": ["s2/canh_08", "v2/canh_17", "v2/canh_18"]},
+    "makeup": {"mo_ta": "test son, phấn má, makeup theo tone", "clips": ["v2/canh_01", "v2/canh_02", "v2/canh_03", "v2/canh_04", "v2/canh_05", "v2/canh_06", "v2/canh_07"]},
+    "phan-tich": {"mo_ta": "phân tích khuôn mặt khách nữ trước gương", "clips": ["v2/canh_10", "v2/canh_11"]},
+    "studio": {"mo_ta": "khách ngồi chờ, không khí studio", "clips": ["v2/canh_15"]}
+  },
+  "khong_dung": {"s2/canh_01": "dính chữ cũ", "s2/canh_19": "logo CapCut", "v2/canh_12": "dính phụ đề cũ (drape cam/xanh rất đẹp, chỉ dùng nếu che được chữ)", "v2/canh_20": "dính chữ cũ", "v2/canh_21": "dính chữ cũ", "v2/canh_22": "logo CapCut"}
+}
