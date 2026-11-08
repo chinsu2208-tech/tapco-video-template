@@ -6,6 +6,8 @@ import {BaziThucThuong, TT_TOTAL} from './BaziThucThuong';
 import {BaziR8, R8_TOTAL} from './BaziR8';
 import {BaziR9, R9_TOTAL} from './BaziR9';
 import {BaziR10, R10_TOTAL} from './BaziR10';
+import {BaziR11, R11_TOTAL} from './BaziR11';
+import {BaziR12, R12_TOTAL} from './BaziR12';
 
 export const Root: React.FC = () => (
   <>
@@ -25,5 +27,11 @@ export const Root: React.FC = () => (
     <Composition id="BaziR10" component={BaziR10} width={1080} height={1920} fps={30} durationInFrames={R10_TOTAL} />
     <Composition id="BaziR10-15" component={BaziR10} width={1080} height={1920} fps={15} durationInFrames={Math.ceil(R10_TOTAL / 2)} />
     <Composition id="BaziR10-guide" component={BaziR10} width={1080} height={1920} fps={15} durationInFrames={Math.ceil(R10_TOTAL / 2)} defaultProps={{guide: true}} />
+    <Composition id="BaziR11" component={BaziR11} width={1080} height={1920} fps={30} durationInFrames={R11_TOTAL} />
+    <Composition id="BaziR11-15" component={BaziR11} width={1080} height={1920} fps={15} durationInFrames={Math.ceil(R11_TOTAL / 2)} />
+    <Composition id="BaziR11-guide" component={BaziR11} width={1080} height={1920} fps={15} durationInFrames={Math.ceil(R11_TOTAL / 2)} defaultProps={{guide: true}} />
+    <Composition id="BaziR12" component={BaziR12} width={1080} height={1920} fps={30} durationInFrames={R12_TOTAL} />
+    <Composition id="BaziR12-15" component={BaziR12} width={1080} height={1920} fps={15} durationInFrames={Math.ceil(R12_TOTAL / 2)} />
+    <Composition id="BaziR12-guide" component={BaziR12} width={1080} height={1920} fps={15} durationInFrames={Math.ceil(R12_TOTAL / 2)} defaultProps={{guide: true}} />
   </>
 );
