@@ -19,7 +19,15 @@ Nguồn: Drive thư mục BDM30 (https://drive.google.com/drive/folders/12aI6q-U
 - `bottle-<mùi>.png`: chai thật đã tách nền, dựng thẳng, cao 1000px. Component `Bottle` dùng mặc định (truyền `drawn` để dùng chai vẽ dự phòng).
 - `sp-<mùi>.jpg`: ảnh gốc nền trắng.
 - `u-*.jpg` (720x1280): 7 ảnh UGC, **đều là chai Baby Angel** — chỉ dùng cho video/cảnh Angel hoặc cảnh chung (đi date): `u-selfie-rap` (selfie rạp phim), `u-rap-phim` (cầm chai trước rạp), `u-ca-phe`, `u-xe-buyt`, `u-da-ngoai` (picnic, chai trên khăn), `u-vuon-nang` (xịt cổ tay), `u-nu-sinh-xit` (xịt ngoài sân).
-- 5 clip Kling (.mov, >10MB) trong thư mục BDM30_UGC_SP chưa đưa vào (connector Drive giới hạn 10MB); nén về 720p rồi đặt vào `public/bmv/` để dùng ở cảnh `full` (`vid`).
+- `public/bmv/k1–k5.mp4`: 5 clip Kling (gốc .mov trong thư mục Drive BDM30_UGC_SP), cắt 7s, nén 720x1280 30fps không tiếng, dùng ở cảnh `full` (`vid`). Đã xem khung hình: **cả 5 clip đều là chai nhãn hồng, chữ "Angel" tím → Baby Angel** (nhãn AI hơi méo; k1, k5 thấy rõ nhất). Chỉ dùng như ảnh UGC: video Angel hoặc cảnh chung của bản mix không nêu tên mùi khác.
+
+| file | mùi | cảnh |
+|---|---|---|
+| `k1.mp4` | Angel | nữ sinh áo khoác xanh, công viên trước cổng trường, đưa chai sát camera |
+| `k2.mp4` | Angel | áo len trắng, quán cà phê sách, cầm chai lắc nhẹ |
+| `k3.mp4` | Angel | áo len tím trên xe buýt, xịt lên người, móc gấu ở balo |
+| `k4.mp4` | Angel | tối, quán trà sữa đèn dây lung linh, cầm chai cạnh ly trà sữa (hợp Noel/đi chơi tối) |
+| `k5.mp4` | Angel | yếm jean, trạm xe buýt trước cổng trường, đưa chai sát camera rồi xịt cổ tay |
 
 ## 2 chế độ
 - **Bản 5 mùi**: `theme: 'mix'`. Mỗi cảnh `scent` có `scent: 'puffy'…` tự đổi sang màu mùi đó. Mẫu: `src/specs/MistLineupDemo.ts` (33s).
