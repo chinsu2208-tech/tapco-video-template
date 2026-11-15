@@ -1,0 +1,11 @@
+import type {MemeSpec} from '../MemeVideo';
+export const tap56: MemeSpec = {
+  voice: 'dl/v56.mp3',
+  caps: [[0.04, 1.29, "Bạn thân khen thơm thì"], [1.29, 2.07, "chưa chắc đã thật,"], [2.07, 3.31, "nhưng nếu nó hỏi bạn"], [3.31, 4.19, "dùng gì mà thơm thế,"], [4.19, 5.16, "thì khác hẳn đó."], [5.16, 6.57, "Khen thì ai cũng khen được,"], [6.57, 7.85, "kiểu xã giao cho vui thôi."], [7.85, 9.1, "Còn tự nhiên quay sang"], [9.1, 9.8, "hỏi tên sản phẩm,"], [9.8, 11.08, "nghĩa là mùi đã kéo sự"], [11.08, 12.06, "chú ý của nó thật rồi."], [12.06, 13.39, "Như bạn khách này viết"], [13.39, 14.09, "trên TikTok Shop nè:"], [14.09, 15.88, "Uii tui dùng xong bạn tui"], [15.88, 17.01, "khen cr còn hỏi dùng gì"], [17.01, 17.77, "mà thơm nửa áaaa,"], [17.77, 18.83, "bữa nào lại mua tiéppp."], [18.83, 20.31, "Đây là cảm nhận riêng của"], [20.31, 21.31, "một bạn khách Baby thôi nha."], [21.31, 22.53, "Nhưng nghe là thấy"], [22.53, 23.21, "mê rồi đúng không,"], [23.21, 24.39, "đi học mà được best friend"], [24.39, 25.08, "ngửi thấy rồi hỏi liền,"], [25.08, 25.87, "ai mà không nở mũi."], [25.87, 26.92, "Nên lần tới,"], [26.92, 27.88, "đừng chỉ nghe khen,"], [27.88, 28.43, "hãy xem bạn thân"], [28.43, 28.8, "có hỏi không nha."], [28.8, 30.27, "Nghía giỏ hàng bên dưới nha."]],
+  scenes: [
+    {"s": 0, "e": 5.16, "bg": "pink", "mode": "bleed", "title": ["BẠN THÂN HỎI", "DÙNG GÌ MÀ THƠM?"], "titleY": 330, "stickers": [], "photos": ["dl/m56_c1.mp4", "dl/m56_c2.mp4"]},
+    {"s": 5.16, "e": 18.83, "bg": "lime", "mode": "frame", "title": ["KHÁCH BABY", "KỂ THẬT"], "titleY": 300, "review": {"stars": 0, "text": "Uii tui dùng xong bạn tui khen cr còn hỏi dùng gì mà thơm nửa áaaa, bữa nào lại mua tiéppp", "src": "Khách TikTok Shop · 11/04/2026", "y": 740}, "stickers": [], "photos": ["dl/m56_c3.mp4", "dl/m56_c4.mp4"]},
+    {"s": 18.83, "e": 28.8, "bg": "yellow", "mode": "bleed", "title": ["KHEN XÃ GIAO", "HAY HỎI THẬT?"], "titleY": 330, "note": "cảm nhận riêng của một bạn khách", "stickers": [], "photos": ["dl/m56_c5.mp4"]},
+    {"s": 28.8, "e": 32.56, "bg": "violet", "mode": "frame", "title": ["NGHÍA GIỎ HÀNG", "BÊN DƯỚI NHA"], "titleY": 300, "stickers": [], "photos": ["dl/m56_p1.mp4"]}
+  ],
+};
