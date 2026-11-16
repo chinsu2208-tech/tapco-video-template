@@ -29,6 +29,27 @@ Nguồn: Drive thư mục BDM30 (https://drive.google.com/drive/folders/12aI6q-U
 | `k4.mp4` | Angel | tối, quán trà sữa đèn dây lung linh, cầm chai cạnh ly trà sữa (hợp Noel/đi chơi tối) |
 | `k5.mp4` | Angel | yếm jean, trạm xe buýt trước cổng trường, đưa chai sát camera rồi xịt cổ tay |
 
+### Kho ảnh chung (`public/kho/`, không có sản phẩm → dùng được cho MỌI mùi)
+Lấy từ kho chung `assets/` (tab 'Kho ảnh', Brand = Chung, sản phẩm = khongsanpham), cảnh đời thường học sinh. Ưu tiên dùng ở cảnh `full` (`img`/`vid`) để video có người thật, không chỉ toàn chai. Cần thêm thì copy `assets/<ID>.*` vào đây (thiếu thì tải Drive, nén 720x1280 7s như mục clip Kling).
+
+| file | cảnh |
+|---|---|
+| `IMG030.jpg` | nữ sinh đeo balo hồng đi trên đường tới trường (sáng, nắng) |
+| `IMG031.jpg` | nữ sinh balo hồng mở cửa ra khỏi nhà |
+| `IMG032.jpg` | nữ sinh trong lớp, ngồi bàn |
+| `CLIP019.mp4` | sân trường, học sinh chạy, 2 bạn đứng nói chuyện |
+| `CLIP020.mp4` | nữ sinh đeo kính kéo cổ áo khoác lên ngửi (hợp ý "thơm") |
+| `CLIP021.mp4` | nữ sinh đeo kính giơ tay phát biểu trong lớp |
+| `CLIP022.mp4` | nữ sinh đứng trước bảng (đến muộn / bị gọi lên) |
+| `CLIP023.mp4` | nữ sinh chống cằm, lớp đông bạn |
+| `CLIP025.mp4` | nữ sinh rửa mặt ở vòi nước sân trường |
+| `CLIP026.mp4` | nữ sinh quay lưng, sân trường cây xanh |
+| `CLIP030.mp4` | nữ sinh ngồi ghế đá dưới gốc cây nhìn sân bóng chuyền |
+| `CLIP036.mp4` | cận mặt nữ sinh đeo kính ngước nhìn |
+| `CLIP038.mp4` | cả lớp ngồi học, nữ sinh đeo kính |
+
+KHÔNG dùng IMG008/IMG009 (tag "khongsanpham" nhưng thực tế cầm chai hồng TAP Store) và ảnh TAP Store/Babyfresh.
+
 ## 2 chế độ
 - **Bản 5 mùi**: `theme: 'mix'`. Mỗi cảnh `scent` có `scent: 'puffy'…` tự đổi sang màu mùi đó. Mẫu: `src/specs/MistLineupDemo.ts` (33s).
 - **Bản 1 mùi**: `theme: 'night'` (hoặc mùi khác), cả video theo màu mùi đó. Mẫu: `src/specs/MistNightDemo.ts` (23s), `src/specs/MistAngelDemo.ts` (24s, dùng ảnh UGC thật). Đổi mùi chỉ cần đổi theme + chữ.
