@@ -63,6 +63,12 @@ import {tap64} from './memeSpecs/tap64';
 import {tap65} from './memeSpecs/tap65';
 import {tap66} from './memeSpecs/tap66';
 import {tap67} from './memeSpecs/tap67';
+import {tap76} from './memeSpecs/tap76';
+import {tap75} from './memeSpecs/tap75';
+import {tap74} from './memeSpecs/tap74';
+import {tap70} from './memeSpecs/tap70';
+import {tap69} from './memeSpecs/tap69';
+import {tap68} from './memeSpecs/tap68';
 export const Root: React.FC = () => (
   <>
   <Composition id="Carousel" component={Carousel} durationInFrames={120} fps={30} width={1080} height={1350} defaultProps={{n: 1}} />
@@ -128,5 +134,11 @@ export const Root: React.FC = () => (
   <Composition id="MemeTap65" component={MemeVideo} durationInFrames={925} fps={30} width={1080} height={1920} defaultProps={{spec: tap65}} />
   <Composition id="MemeTap66" component={MemeVideo} durationInFrames={898} fps={30} width={1080} height={1920} defaultProps={{spec: tap66}} />
   <Composition id="MemeTap67" component={MemeVideo} durationInFrames={1034} fps={30} width={1080} height={1920} defaultProps={{spec: tap67}} />
+  <Composition id="MemeTap76" component={MemeVideo} durationInFrames={815} fps={30} width={1080} height={1920} defaultProps={{spec: tap76}} />
+  <Composition id="MemeTap75" component={MemeVideo} durationInFrames={815} fps={30} width={1080} height={1920} defaultProps={{spec: tap75}} />
+  <Composition id="MemeTap74" component={MemeVideo} durationInFrames={913} fps={30} width={1080} height={1920} defaultProps={{spec: tap74}} />
+  <Composition id="MemeTap70" component={MemeVideo} durationInFrames={860} fps={30} width={1080} height={1920} defaultProps={{spec: tap70}} />
+  <Composition id="MemeTap69" component={MemeVideo} durationInFrames={780} fps={30} width={1080} height={1920} defaultProps={{spec: tap69}} />
+  <Composition id="MemeTap68" component={MemeVideo} durationInFrames={814} fps={30} width={1080} height={1920} defaultProps={{spec: tap68}} />
   </>
 );
