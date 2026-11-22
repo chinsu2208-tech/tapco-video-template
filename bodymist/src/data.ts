@@ -10,6 +10,10 @@ import BM94 from './specs/BM94';
 import BM95 from './specs/BM95';
 import BM96 from './specs/BM96';
 import BM97 from './specs/BM97';
+import BM98 from './specs/BM98';
+import BM99 from './specs/BM99';
+import BM100 from './specs/BM100';
+import BM101 from './specs/BM101';
 
 // Thêm spec mới: tạo src/specs/<ID>.ts rồi import + thêm vào mảng dưới.
-export const VIDEOS: VideoData[] = [MistLineupDemo, MistNightDemo, MistAngelDemo, BM62, BM63, BM64, BM65, BM94, BM95, BM96, BM97];
+export const VIDEOS: VideoData[] = [MistLineupDemo, MistNightDemo, MistAngelDemo, BM62, BM63, BM64, BM65, BM94, BM95, BM96, BM97, BM98, BM99, BM100, BM101];
