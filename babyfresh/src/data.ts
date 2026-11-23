@@ -23,6 +23,9 @@ import CM84 from './specs/CM84';
 import CM85 from './specs/CM85';
 import CM86 from './specs/CM86';
 import CM87 from './specs/CM87';
+import CM88 from './specs/CM88';
+import CM89 from './specs/CM89';
+import CM90 from './specs/CM90';
 
 // Thêm spec mới: tạo src/specs/CMxx.ts rồi import + thêm vào mảng dưới.
-export const VIDEOS: VideoData[] = [CM34, CM35, CM36, CM37, CM38, CM39, CM45, CM46, CM47, CM55, CM56, CM57, CM58, CM59, CM60, CM61, CM80, CM81, CM82, CM83, CM84, CM85, CM86, CM87];
+export const VIDEOS: VideoData[] = [CM34, CM35, CM36, CM37, CM38, CM39, CM45, CM46, CM47, CM55, CM56, CM57, CM58, CM59, CM60, CM61, CM80, CM81, CM82, CM83, CM84, CM85, CM86, CM87, CM88, CM89, CM90];
