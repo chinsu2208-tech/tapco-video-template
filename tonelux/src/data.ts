@@ -66,5 +66,16 @@ import T584 from './specs/T584';
 import T585 from './specs/T585';
 import T586 from './specs/T586';
 
+import T643 from './specs/T643';
+import T644 from './specs/T644';
+import T645 from './specs/T645';
+import T646 from './specs/T646';
+import T647 from './specs/T647';
+import T648 from './specs/T648';
+import T649 from './specs/T649';
+import T650 from './specs/T650';
+import T651 from './specs/T651';
+import T652 from './specs/T652';
+
 // Thêm spec mới: tạo src/specs/<ID>.ts rồi import + thêm vào mảng dưới.
-export const VIDEOS: VideoData[] = [ToneOverviewDemo, ToneAutumnDemo, ToneNamTest, T602, T592, T593, T594, T595, T596, T597, T598, T599, T600, T601, T618, T619, T620, T621, T622, T623, T624, T625, T626, T627, T608, T609, T610, T611, T612, T613, T614, T615, T616, T617, T587, T588, T589, T590, T591, T603, T604, T605, T606, T607, T577, T578, T579, T580, T581, T582, T583, T584, T585, T586];
+export const VIDEOS: VideoData[] = [ToneOverviewDemo, ToneAutumnDemo, ToneNamTest, T602, T592, T593, T594, T595, T596, T597, T598, T599, T600, T601, T618, T619, T620, T621, T622, T623, T624, T625, T626, T627, T608, T609, T610, T611, T612, T613, T614, T615, T616, T617, T587, T588, T589, T590, T591, T603, T604, T605, T606, T607, T577, T578, T579, T580, T581, T582, T583, T584, T585, T586, T643, T644, T645, T646, T647, T648, T649, T650, T651, T652];
