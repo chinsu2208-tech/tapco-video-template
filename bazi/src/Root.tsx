@@ -42,6 +42,9 @@ import {BaziR43, R43_TOTAL} from './BaziR43';
 import {BaziR44, R44_TOTAL} from './BaziR44';
 import {BaziR45, R45_TOTAL} from './BaziR45';
 import {BaziR46, R46_TOTAL} from './BaziR46';
+import {BaziR47, R47_TOTAL} from './BaziR47';
+import {BaziR48, R48_TOTAL} from './BaziR48';
+import {BaziR49, R49_TOTAL} from './BaziR49';
 
 export const Root: React.FC = () => (
   <>
@@ -169,5 +172,14 @@ export const Root: React.FC = () => (
     <Composition id="BaziR46" component={BaziR46} width={1080} height={1920} fps={30} durationInFrames={R46_TOTAL} />
     <Composition id="BaziR46-15" component={BaziR46} width={1080} height={1920} fps={15} durationInFrames={Math.ceil(R46_TOTAL / 2)} />
     <Composition id="BaziR46-guide" component={BaziR46} width={1080} height={1920} fps={15} durationInFrames={Math.ceil(R46_TOTAL / 2)} defaultProps={{guide: true}} />
+    <Composition id="BaziR47" component={BaziR47} width={1080} height={1920} fps={30} durationInFrames={R47_TOTAL} />
+    <Composition id="BaziR47-15" component={BaziR47} width={1080} height={1920} fps={15} durationInFrames={Math.ceil(R47_TOTAL / 2)} />
+    <Composition id="BaziR47-guide" component={BaziR47} width={1080} height={1920} fps={15} durationInFrames={Math.ceil(R47_TOTAL / 2)} defaultProps={{guide: true}} />
+    <Composition id="BaziR48" component={BaziR48} width={1080} height={1920} fps={30} durationInFrames={R48_TOTAL} />
+    <Composition id="BaziR48-15" component={BaziR48} width={1080} height={1920} fps={15} durationInFrames={Math.ceil(R48_TOTAL / 2)} />
+    <Composition id="BaziR48-guide" component={BaziR48} width={1080} height={1920} fps={15} durationInFrames={Math.ceil(R48_TOTAL / 2)} defaultProps={{guide: true}} />
+    <Composition id="BaziR49" component={BaziR49} width={1080} height={1920} fps={30} durationInFrames={R49_TOTAL} />
+    <Composition id="BaziR49-15" component={BaziR49} width={1080} height={1920} fps={15} durationInFrames={Math.ceil(R49_TOTAL / 2)} />
+    <Composition id="BaziR49-guide" component={BaziR49} width={1080} height={1920} fps={15} durationInFrames={Math.ceil(R49_TOTAL / 2)} defaultProps={{guide: true}} />
   </>
 );
